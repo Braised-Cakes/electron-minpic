@@ -20,7 +20,7 @@ const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync(path.resolve(app.getPath('home'), 'electron-minpic.json'))
 const db = low(adapter)
-const is_dev = true;
+const is_dev = false;
 
 electron.ipcMain.on('setKey', (event, arg) => {
 	db.set('list', arg)

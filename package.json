@@ -7,24 +7,27 @@
     "scripts": {
         "dev": "webpack-dev-server --inline --progress --config node_modules/qaep-core/build/webpack.dev.conf.js",
         "start": "electron .",
-        "build": "node node_modules/qaep-core/build/build.js"
+        "build": "node node_modules/qaep-core/build/build.js",
+        "dist": "electron-builder"
     },
     "dependencies": {
         "art-template": "^4.12.2",
-        "electron": "^1.8.2",
         "element-ui": "^2.0.11",
         "image-size": "^0.6.2",
         "jquery": "^3.3.1",
         "lowdb": "^1.0.0",
         "md5": "^2.2.1",
         "normalize.css": "^7.0.0",
+        "request": "^2.83.0",
         "request-progress": "^3.0.0",
         "tinify": "^1.5.0",
         "vue": "^2.5.2",
         "vue-router": "^3.0.1",
-        "vuex": "^3.0.1"
+        "vuex": "^3.0.1",
+        "glob": "^7.1.2"
     },
     "devDependencies": {
+        "electron": "^1.8.2",
         "art-template-loader": "^1.4.3",
         "async": "^2.6.0",
         "autoprefixer": "^7.1.2",
@@ -61,7 +64,6 @@
         "extract-text-webpack-plugin": "^3.0.2",
         "file-loader": "^1.1.4",
         "friendly-errors-webpack-plugin": "^1.6.1",
-        "glob": "^7.1.2",
         "gulp": "^3.9.1",
         "html-webpack-plugin": "^2.30.1",
         "html-withimg-loader": "^0.1.16",

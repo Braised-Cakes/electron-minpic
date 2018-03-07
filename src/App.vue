@@ -1,11 +1,129 @@
-<template>
-    <div>
-        <div class="app2">
-            <header>
-                Minpic for Mac
-            </header>
-            <section @click="openFile" class="drag">
+<style lang="scss" scoped>
+    .app {
+        background: linear-gradient(#24aad6, #197ab9);
+        header {
+            text-align: center;
+            color: #fff;
+            -webkit-app-region: drag;
+        }
+        main {
+            .drag {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                height: 250px;
+                overflow: hidden;
+                background-size: 100px 100px;
+                cursor: pointer;
+                .drag-image {
+                    width: 125px;
+                    height: 125px;
+                    margin-top: 60px;
+                    align-self: center;
+                }
+                p {
+                    color: #4ea0cc;
+                }
+                .img-wrapper {
+                    overflow: scroll;
+                    width: 100%;
+                    li {
+                        display: flex;
+                        padding: 0 20px;
+                        height: 48px;
+                        margin: 5px 0;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+                    img {
+                        width: 48px;
+                    }
+                }
 
+                .circle {
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background-size: cover;
+                }
+
+                .circle img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                .item-img {
+                    width: 48px;
+                    height: 48px;
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                }
+
+                .circleProgress_wrapper {
+                    width: 16px;
+                    height: 16px;
+                    position: relative;
+                    border: 1px solid #fff;
+                    border-radius: 50%;
+                }
+
+                .circleProgress {
+                    border: 8px solid #fff;
+                    border-radius: 50%;
+                    position: absolute;
+                    top: 0;
+                    -webkit-transform: rotate(45deg);
+                }
+
+                .wrapper {
+                    width: 8px;
+                    height: 16px;
+                    position: absolute;
+                    top: 0;
+                    overflow: hidden;
+                }
+
+                .right {
+                    right: 0;
+                }
+
+                .left {
+                    left: 0;
+                }
+
+                .rightcircle {
+                    border-top: 8px solid transparent;
+                    border-right: 8px solid transparent;
+                    right: 0;
+
+                }
+
+                .leftcircle {
+                    border-bottom: 8px solid transparent;
+                    border-left: 8px solid transparent;
+                    left: 0;
+                }
+            }
+        }
+        footer {
+            background: #fff;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+        }
+
+    }
+
+</style>
+
+<template>
+    <div class="app">
+        <header>
+            Minpic for Mac
+        </header>
+        <main class="container">
+            <div @click="openFile" class="drag">
+                <img class="drag-image" v-if="data.length == 0" src="src/image/icon.png" />
                 <ul class="img-wrapper">
                     <li class="item" v-for="item in data">
                         <div class="item-wrap" style="display:flex;height:48px;">
@@ -21,7 +139,9 @@
                             </div>
                         </div>
                         <!-- 下载完成 -->
-                        <div v-if="item.status === 'success'" class="circle"></div>
+                        <div v-if="item.status === 'success'" class="circle">
+                            <img src="src/image/icon_finish.png" />
+                        </div>
                         <div v-if="item.status === 'processIng'" class="circleProgress_wrapper">
                             <div class="wrapper right">
                                 <div :style="{'-webkit-transform' : 'rotate(' + (45 + item.progressUpload * 180) + 'deg)'}" class="circleProgress rightcircle"></div>
@@ -33,15 +153,15 @@
                     </li>
                 </ul>
                 <!-- <p>拖拽PNG/JPG文件到这里!</p> -->
-            </section>
-            <section style="box-shadow:0px 8px 8px rgba(0,0,0,0.2);position:relative;z-index:999;display:flex;justify-content:space-between;padding:0 12px;">
+            </div>
+            <div style="box-shadow:0px 8px 8px rgba(0,0,0,0.2);position:relative;z-index:999;display:flex;justify-content:space-between;padding:0 12px;">
                 <p>0个任务</p>
                 <div>
                     <img style="width:20px;height:20px;cursor:pointer;margin-right:10px;" src="src/image/folder.png" />
                     <img @click="changeSize" style="width:20px;height:20px;cursor:pointer;" src="src/image/icon_settings.png" />
                 </div>
-            </section>
-        </div>
+            </div>
+        </main>
         <footer style="position:relative">
             <p @click="keylist.push({key:''})">+</p>
             <div>
